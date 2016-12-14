@@ -3,11 +3,11 @@ use 5.006;
 use strict;
 use warnings;
 
-use lib 'lib';
+use lib '../lib';
 
-use Test::Most tests => 5;
+use Test::More tests => 5;
 use Test::Warn;
-use Text::CSV::Slurp;
+use Text::PRN::Slurp;
 
 BEGIN {
     use_ok( 'Text::PRN::Slurp' ) || print "Bail out!\n";
@@ -26,28 +26,28 @@ isa_ok ($object, 'Text::PRN::Slurp');
         $slurp,
         [
             {
-                'Description' => 'Active Serve',
-                'ID' => '1',
-                'Type' => 'ASP'
+                'Description' => 'Active Server Pages',
+                'Type' => 'ASP',
+                'ID' => '1'
             },
             {
-                'Type' => 'JSP',
                 'ID' => '2',
-                'Description' => 'JavaServer P'
+                'Type' => 'JSP',
+                'Description' => 'JavaServer Pages'
             },
             {
-                'Type' => 'PNG',
+                'Description' => 'Portable Network Graphics',
                 'ID' => '3',
-                'Description' => 'Portable Net'
+                'Type' => 'PNG'
             },
             {
                 'Type' => 'GIF',
                 'ID' => '4',
-                'Description' => 'Graphics Int'
+                'Description' => 'Graphics Interchange Format'
             },
             {
+                'Description' => 'Windows Media Video',
                 'Type' => 'WMV',
-                'Description' => 'Windows Medi',
                 'ID' => '5'
             }
         ],
@@ -58,47 +58,42 @@ isa_ok ($object, 'Text::PRN::Slurp');
 # With extra column
 {
     my $slurp;
-    warning_is {
+    warning_like {
         $slurp = Text::PRN::Slurp->new->load(
             'file' => 't/data/sample_2.prn',
             'file_headers' => [ q{ID}, q{Type}, q{Description}, q{JAI} ]
         );
     }
-    "Columns doesn't seems to be matching",
+    qr/Columns doesn't seems to be matching/i,
     'warning when extra colum supplied';
 
     is_deeply(
         $slurp,
         [
             {
-                'Description' => 'Active Serve',
-                'ID' => '1',
                 'Type' => 'ASP',
-                'JAI' => ''
+                'Description' => 'Active Server Pages',
+                'ID' => '1'
             },
             {
+                'Description' => 'JavaServer Pages',
                 'Type' => 'JSP',
-                'ID' => '2',
-                'Description' => 'JavaServer P',
-                'JAI' => ''
+                'ID' => '2'
             },
             {
+                'Description' => 'Portable Network Graphics',
                 'Type' => 'PNG',
-                'ID' => '3',
-                'Description' => 'Portable Net',
-                'JAI' => ''
+                'ID' => '3'
             },
             {
+                'Description' => 'Graphics Interchange Format',
                 'Type' => 'GIF',
-                'ID' => '4',
-                'Description' => 'Graphics Int',
-                'JAI' => ''
+                'ID' => '4'
             },
             {
                 'Type' => 'WMV',
-                'Description' => 'Windows Medi',
-                'ID' => '5',
-                'JAI' => ''
+                'Description' => 'Windows Media Video',
+                'ID' => '5'
             }
         ],
         "PRN file parsed correctly"

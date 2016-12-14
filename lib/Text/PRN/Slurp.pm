@@ -135,11 +135,13 @@ sub _from_io_handler {
             for( my $col_index=0; $col_index<=$#file_header; $col_index++ ) {
                 my $col = $file_header[$col_index];
                 my $col_length = $col_length_map{ $col } || 0;
-                my $col_data = substr $row, $string_offset, $col_length;
-                # remove leading and trailing spaces
-                $col_data =~s{^\s+|\s+$}{}g;
-                $extracted_row_data{ $col } = $col_data;
-                $string_offset += $col_length;
+                if ( $col_length ) {
+                    my $col_data = substr $row, $string_offset, $col_length;
+                    # remove leading and trailing spaces
+                    $col_data =~s{^\s+|\s+$}{}g;
+                    $extracted_row_data{ $col } = $col_data;
+                    $string_offset += $col_length;
+                }
             }
 
             push @file_data_as_array, \%extracted_row_data;
