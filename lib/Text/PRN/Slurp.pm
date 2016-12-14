@@ -42,7 +42,7 @@ PRN, short name for Printable, is used as the file extension for files padded wi
 
 =head1 EXPORT
 
-=item new
+=head2 new
 
     Constructors method
 
@@ -53,7 +53,7 @@ sub new {
     return bless {}, $class;
 }
 
-=item load
+=head2 load
 
     my $data = Text::PRN::Slurp->load(file       => $filename   ,file_headers => ['A','B','C']);
     my $data = Text::PRN::Slurp->load(filehandle => $filehandle ,file_headers => ['A','B','C']);
