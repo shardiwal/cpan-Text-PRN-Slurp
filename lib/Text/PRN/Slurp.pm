@@ -111,7 +111,6 @@ sub _from_io_handler {
 
     my $row_count = 1;
     while (my $row = <$io>) {
-        chomp $row;
         ## Assume first row is heading
         if ( $row_count == 1 ) {
             foreach my $col_heading ( @file_header ) {
@@ -130,6 +129,7 @@ sub _from_io_handler {
             }
         }
         else {
+            chomp $row;
             my $string_offset = 0;
             my %extracted_row_data;
             for( my $col_index=0; $col_index<=$#file_header; $col_index++ ) {
