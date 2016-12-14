@@ -31,4 +31,14 @@ WriteMakefile(
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Text-PRN-Slurp-*' },
+    META_MERGE => {
+        'meta-spec' => { version => 2 },
+        resources   => {
+            repository => {
+                type => 'git',
+                url => 'git@github.com:shardiwal/cpan-Text-PRN-Slurp.git',
+                web => 'https://github.com/shardiwal/cpan-Text-PRN-Slurp'
+            },
+        },
+    },
 );
