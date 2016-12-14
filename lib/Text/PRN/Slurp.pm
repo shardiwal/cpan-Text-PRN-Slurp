@@ -12,13 +12,13 @@ Text::PRN::Slurp - Parse and read .PRN File Extension
 
 =head1 VERSION
 
-Version 0.01
+Version 1.04
 
 =cut
 
 use vars qw/$VERSION/;
 
-$VERSION = 1.03;
+$VERSION = 1.04;
 
 
 =head1 SYNOPSIS
