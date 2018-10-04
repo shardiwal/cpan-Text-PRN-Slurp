@@ -5,14 +5,14 @@ use warnings;
 
 use IO::File;
 use IO::Scalar;
-
+use Data::Dumper;
 =head1 NAME
 
 Text::PRN::Slurp - Parse and read .PRN File Extension
 
 =head1 VERSION
 
-Version 1.04
+Version 1.05
 
 =cut
 
